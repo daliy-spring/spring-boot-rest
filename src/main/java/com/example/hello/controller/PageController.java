@@ -16,13 +16,13 @@ public class PageController {
 
     //ResponseEntity
 
-    @ResponseBody // 바디를 만들어 내린다.
-    @GetMapping("/user")
-    public User user() {
-        var user = new User();
-        user.setName("leesky");
-        user.setAddress("test");
-        return user;
-    }
+//    @ResponseBody // 바디를 만들어 내린다.
+//    @GetMapping("/user")
+//    public User user() {
+//        var user = new User();
+//        user.setName("leesky");
+//        user.setAddress("test");
+//        return user;
+//    }
 
 }
