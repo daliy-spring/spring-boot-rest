@@ -1,12 +1,11 @@
 package com.example.hello.controller;
-
-
+import com.example.hello.dto.UserRequest;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/get")
 public class GetApiController {
-
     @GetMapping(path="/hello")
     public String getHello() {
         return "get hello";
@@ -30,9 +29,40 @@ public class GetApiController {
         return "안녕하세요 " + pathName +  " 님";
     }
 
-    @GetMapping("/query-param")
+    @GetMapping(path = "/query-param")
     public String queryParam(@RequestParam("sort") String sortMethod) {
         return sortMethod;
+    }
+
+    @GetMapping(path ="/query-param2")
+    public String queryParam2(
+            @RequestParam String name,
+            @RequestParam String email,
+            @RequestParam int age
+    ) {
+        return name + " " + email + " " + age;
+    }
+    @GetMapping(path = "/query-param-map")
+    public String queryParamMap(@RequestParam Map<String, String> queryParam) {
+        StringBuilder sb = new StringBuilder();
+        queryParam.entrySet().forEach(entry -> {
+            System.out.println(entry.getKey()) ;
+            System.out.println(entry.getValue()) ;
+            System.out.println("\n");
+
+            sb.append(entry.getKey() + " = " + entry.getValue() + "\n");
+
+        });
+        return sb.toString();
+    }
+
+    //request param 어노테이션 넣지 않음 => 내부적으로 객체가 인자로 들어오면, query param을 매칭을 해서 넣어준다.
+    @GetMapping(path ="/query-param3")
+    public String queryParam3(
+        UserRequest userRequest
+    ) {
+        return userRequest.toString();
+
     }
 }
 
